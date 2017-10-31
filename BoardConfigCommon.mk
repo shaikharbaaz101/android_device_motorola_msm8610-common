@@ -47,7 +47,7 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1 vmalloc=400M
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1 vmalloc=400M androidboot.selinux=permissive
 LZMA_RAMDISK_TARGETS := recovery
 
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
@@ -99,7 +99,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 MALLOC_SVELTE := true
 
 # Qualcomm support
-BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_HARDWARE := false
 TARGET_RIL_VARIANT := caf
 
 # Recovery
@@ -108,7 +108,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 HAVE_SELINUX := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
+include device/qcom/sepolicy/Android.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
 # Storage & partiiton
@@ -133,12 +133,3 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Basic dexpreopt
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-      WITH_DEXPREOPT_BOOT_IMG_ONLY := true
-    endif
-  endif
-endif

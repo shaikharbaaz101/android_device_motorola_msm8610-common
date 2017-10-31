@@ -156,6 +156,10 @@ PRODUCT_PACKAGES += \
     FMRadio \
     libfmjni
 
+# Radio
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig
+
 # Lights
 PRODUCT_PACKAGES += \
     lights.msm8610
